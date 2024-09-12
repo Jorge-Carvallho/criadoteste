@@ -1,0 +1,1 @@
+parei aula 64 m 11 na config allowed_host
