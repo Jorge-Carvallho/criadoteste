@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,13 +77,15 @@ WSGI_APPLICATION = 'eventex.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-default_dburl = 'sqlite:///' = str(BASE_DIR / 'db.sqlite3')
+# default_dburl = 'sqlite:///' = str(BASE_DIR / 'db.sqlite3')
+default_dburl = f"sqlite:///{str(BASE_DIR / 'db.sqlite3')}"
+
 DATABASES = {
     'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-    # }
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
 
 
@@ -122,6 +124,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
